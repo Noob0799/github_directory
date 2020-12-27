@@ -12,7 +12,7 @@ class List extends Component {
     }
 
     componentDidMount() {
-        const userData = JSON.parse(localStorage.getItem('userData'));
+        let userData = JSON.parse(localStorage.getItem('userData'));
         console.log('User Data', userData);
         if(!userData) {
             userData = [];
