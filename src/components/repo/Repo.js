@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import './Repo.css';
 
+//functional component to display top 5 repository information of each user
 const Repo = (props) => {
     const repoData = props.repoData;
     let repoElement = repoData ? (

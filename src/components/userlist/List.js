@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from "react";
+import ReactDOM from 'react-dom';
 import Navbar from '../utility/navbar/Navbar';
 import User from '../user/User';
 import './List.css';
+import Modal from '../modal/Modal';
 
+//Component to display favourite user information alongwith their top 5 repos in /list route
 class List extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +25,7 @@ class List extends Component {
         });
     }
 
+    //function to handle toggle functionality to show/hide repository information
     handleToggle = (user) => {
         // console.log(user);
         const ref = document.getElementById('collapse'+user.login);
@@ -33,6 +37,7 @@ class List extends Component {
         }
     }
 
+    //function to remove user information from list component
     handleRemove = (user) => {
         let userData = [...JSON.parse(localStorage.getItem('userData'))];
         userData = userData.filter(obj => {
@@ -42,7 +47,9 @@ class List extends Component {
         this.setState({
             userData: userData
         });
-        alert('User removed');
+        // alert('User removed');
+        ReactDOM.render(<Modal message='User removed'/>, document.getElementById('modal-area'));
+        document.getElementById('navbar').scrollIntoView();
     }
 
     render() {
@@ -66,6 +73,7 @@ class List extends Component {
             <Fragment>
                 <Navbar type='list'/>
                 {element}
+                <div id="modal-area"></div>
             </Fragment>
         );
     }

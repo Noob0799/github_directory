@@ -21,7 +21,7 @@ const Navbar = (props) => {
     }
     return (
         <Fragment>
-            <nav className="navbar navbar-inverse">
+            <nav className="navbar navbar-inverse" id="navbar">
                 <div className="container-fluid">
                     <ul className="nav navbar-nav">
                         <li>

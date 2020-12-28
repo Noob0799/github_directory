@@ -1,0 +1,35 @@
+.modal {
+    position: absolute;
+    display: block;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: fit-content;
+    margin-left: 40%;
+    margin-top: 10%;
+    border: 2px solid black;
+    border-radius: 25px;
+    background-color:  #ffc107;
+  }
+  
+  .close {
+    position: absolute;
+    z-index: 200;
+    top: 0;
+    right: 0;
+    margin-top: 1%;
+    margin-right: 2%;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .modal-text {
+    color: black;
+    font-weight: 400;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }

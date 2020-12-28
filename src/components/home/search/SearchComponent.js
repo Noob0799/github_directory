@@ -6,8 +6,8 @@ class SearchComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userData: [], //to store character data on which searching will be done
-            filteredSearchResult: [], //to store the search result after filtering the rest out
+            userData: [], //to store user data on which searching will be done
+            filteredSearchResult: [], //to store the search result
         };
     }
 
@@ -62,7 +62,7 @@ class SearchComponent extends Component {
         console.log('Filtered search result:', this.state.filteredSearchResult);
         return(
             <Fragment>
-                <div className="search">
+                <div className="search" id="search">
                     <input type="text" className="searchTerm" id="searchTerm" placeholder="Search by user name..." onKeyUp={this.handleChange}/>
                     <button type="button" className="searchButton" disabled>
                         <i className="fa fa-search"></i>

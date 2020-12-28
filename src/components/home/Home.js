@@ -1,17 +1,19 @@
 import React, { Component, Fragment } from "react";
+import ReactDOM from 'react-dom';
 import Navbar from '../utility/navbar/Navbar';
 import Pagination from '../utility/pagination/Pagination';
 import User from '../user/User';
 import SearchComponent from './search/SearchComponent';
 import Axios from 'axios';
 import './Home.css';
+import Modal from '../modal/Modal';
 
-//Component to display list of characters via pagination and implement searching and filtering. Component rendered at /
+//Component to display list of users via pagination and implement searching. Component rendered at /
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],  //to store character data from api
+            data: [],  //to store user data from api
             displayData: [], //to store data to be displayed
             currentPage: 1 //to store current page number
         };
@@ -26,11 +28,15 @@ class Home extends Component {
                     data: resData,
                     displayData: resData
                 });
-                alert('Github user data fetched');
+                // alert('Github user data fetched');
+                ReactDOM.render(<Modal message='Github user data fetched'/>, document.getElementById('modal-area'));
+                document.getElementById('navbar').scrollIntoView();
             })
             .catch(error => {
                 console.log({error});
-                alert('Could not fetch data. Check log.');
+                // alert('Could not fetch data. Check log.');
+                ReactDOM.render(<Modal message='Could not fetch data. Check log.'/>, document.getElementById('modal-area'));
+                document.getElementById('navbar').scrollIntoView();
             })
     }
 
@@ -59,9 +65,9 @@ class Home extends Component {
         });
     }
 
-    //function to handle filtered data after searching or filtering and displaying it
+    //function to handle filtered data after searching and displaying it
     handleFilteredData = (arr, type) => {
-        if(type === 'All') {  //All is for the 'All' option in season dropdown
+        if(type === 'All') {  //All is to show entire list of users
             this.setState({
                 displayData: [...this.state.data],
                 currentPage: 1
@@ -74,6 +80,7 @@ class Home extends Component {
         }
     }
 
+    //function to handle toggle functionality to show/hide repo information
     handleToggle = (user) => {
         // console.log(user);
         const ref = document.getElementById('collapse'+user.login);
@@ -85,6 +92,7 @@ class Home extends Component {
         }
     }
 
+    //function to add user information to List component via localstorage
     handleAdd = (user) => {
         let userData = [];
         if(localStorage.getItem('userData')) {
@@ -97,12 +105,17 @@ class Home extends Component {
                 break;
             }
         }
+        const ref = document.getElementById('modal-area');
         if(!found) {
             userData.push(user);
             localStorage.setItem('userData',JSON.stringify(userData));
-            alert('User list updated')
+            // alert('User list updated')
+            ReactDOM.render(<Modal message='User list updated'/>, ref);
+            document.getElementById('navbar').scrollIntoView();
         } else {
-            alert('User exists');
+            // alert('User exists');
+            ReactDOM.render(<Modal message='User exists'/>, ref);
+            document.getElementById('navbar').scrollIntoView();
         }
     }
 
@@ -141,6 +154,7 @@ class Home extends Component {
             <Fragment>
                 <Navbar type='home'/>
                 {element}
+                <div id="modal-area"></div>
             </Fragment>
         );
     }

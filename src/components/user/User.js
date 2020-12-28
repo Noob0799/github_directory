@@ -4,7 +4,7 @@ import Axios from "axios";
 import './User.css';
 import Repo from '../repo/Repo';
 
-//Functional component to render each character card showing name,nickname and actor name with character image
+//Component to render each user card showing name,user image and user account URL
 class User extends Component {
     constructor(props) {
         super(props);
@@ -29,7 +29,7 @@ class User extends Component {
         })
     }
 
-
+//function to sort user repositories according to stargazers count
     sortData = (data) => {
         const sortedData = data.sort((a,b) => Number(b.stargazers_count) - Number(a.stargazers_count));
         const minlength = Math.min(sortedData.length,5);
